@@ -3,22 +3,26 @@
 
 #include "mochila_publica.h"
 
+typedef struct item item;
+
 int OrdenarItems(Loja);
 int VerificaPeso(Mochila);
- 
-typedef struct {
-    int *identificador;
-    float *valor;
-    float *QtdInicial;
-    float *QtdDisponivel;
-    float *cb;
-}Loja;
 
-typedef struct {
-    float CapacidadeInicial;
+typedef struct Mochila{
+    
+    float CapacidadeTotal;
     float CapacidadeDisponivel;
-    float *idItem;
-    float *peso;
+
+    item *conteudo;
 }Mochila;
+
+struct item{
+    int idItem;
+    float peso;
+    float valor;
+    float cb;
+    item *ant;
+    item *prox;
+};
 
 #endif
