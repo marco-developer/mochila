@@ -14,6 +14,8 @@ int CarregaMochila(pMochila M, pLoja L);
 int ImprimeMochila(pMochila M);
 int DestruirMochila(pMochila M);
 
+int OrdenarLoja(pLoja L);
+
 int CriarLoja(pLoja *L, float CapacidadeLoja);
 int AddLoja(pLoja L, int ID, float valor, float QtdInicial);
 int ImprimeLoja(pLoja L);

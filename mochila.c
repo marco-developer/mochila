@@ -69,7 +69,8 @@ int AddLoja(pLoja L, int ID, float valor, float QtdInicial){
     // Para a Loja, a capacidade disponivel eh considerada em qtd de itens, diferente da mochila, que eh em peso.
     if(L->CapacidadeDisponivel==0) {
         printf("Sem espaco para alocar mais itens!\n");
-        exit(1);
+        //exit(1);
+        return 1;
     } else {
 
         //aloca struct para item
@@ -93,7 +94,7 @@ int AddLoja(pLoja L, int ID, float valor, float QtdInicial){
     // reduz capacidade da loja
     L->CapacidadeDisponivel--;
     printf("Nova capacidade da loja: %.0f\n\n", L->CapacidadeDisponivel);
-        
+    return 0;
 }
 
 int ImprimeLoja(pLoja L) {
@@ -111,7 +112,7 @@ int ImprimeLoja(pLoja L) {
         printf("Valor total do item: %f\n", L->conteudo[i]->valor);
         printf("C/B do item: %f\n\n", L->conteudo[i]->cb);
     }
-
+    return 0;
 }
 
 int ImprimeMochila(pMochila M) {
@@ -129,7 +130,7 @@ int ImprimeMochila(pMochila M) {
         printf("Valor total do item: %f\n", M->conteudo[i]->valor);
         printf("C/B do item: %f\n\n", M->conteudo[i]->cb);
     }
-
+    return 0;
 }
 
 int OrdenarLoja(pLoja L) {
@@ -158,9 +159,11 @@ int OrdenarLoja(pLoja L) {
 int CarregaMochila(pMochila M, pLoja L) {
 
     int i = 0;
-    float lucro, temp;
+    float lucro = 0;
+    float temp = 0;
 
     printf("\nIniciando carregamento da mochila...\n\n");
+    printf("Capacidade Disponivel = %f\n",M->CapacidadeDisponivel);
     while(M->CapacidadeDisponivel!=0) {
 
         printf("Cap. Mochila: %f\n", M->CapacidadeDisponivel);
