@@ -38,7 +38,8 @@ int CriarLoja(pLoja *L, float CapacidadeLoja) {
         
     // Aloca espaco em memoria para Loja (2 dados do tipo inteiro para cada item)
     // printf("Alocando memoria!\n");
-    pLoja tmp_Loja = (pLoja) malloc(sizeof(Loja));
+    pLoja tmp_Loja = NULL;
+    tmp_Loja = (pLoja) malloc(sizeof(Loja));
 
     if(tmp_Loja == NULL){
         printf("Erro: Falha na alocacao de memoria!\n");
@@ -223,12 +224,11 @@ int CarregaMochila(pMochila M, pLoja L) {
         } else i++;
     }
     
-    /*  APRESENTA ERROS NO VALGRIND!!
     printf("\nPeso\t\tPreco \n");
     for(i=0;i<=M->posicao;i++)
         printf("%f\t%f\n", M->conteudo[i]->peso, M->conteudo[i]->valor);
     printf("\nLucro maximo: %f\n", lucro);
-    */
+    
 return 0;
 }
 

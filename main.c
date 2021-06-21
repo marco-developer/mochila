@@ -42,17 +42,17 @@ float * CriaVetor(int tamanho, int valorInicial, int Crescente)
 
 void main(int argc, char *argv[])
 {
-    FILE *arq;
+
     float cap, cb[MAXLOJA];
     int i=0, qtditens;
     const char delim[2] = " ";
-    char line[MAXLOJA], *tmp, *campos[2*MAXLOJA], *tmp1;
+    char line[MAXLOJA];
     char *token;
     pLoja L = NULL;
     pMochila M = NULL;
 
 
-/*
+
     if(argc==1) {
         printf ("Argumentos insuficientes. Informe o nome do arquivo.");
         exit(1);  
@@ -103,15 +103,17 @@ void main(int argc, char *argv[])
     for(int j=0;j<i;j++) {
         AddLoja(L, j, valor[j], qtd_inicial[j]);
     }
-
-*/
-
+    fclose(arq);
 
 
 
 
 
 
+
+
+
+/*
     int *Resultado;
 
     float * qdeInicial;
@@ -137,7 +139,7 @@ void main(int argc, char *argv[])
     free(qdeInicial);
     free(valor);
 
-
+*/
 
 
 
@@ -158,15 +160,7 @@ void main(int argc, char *argv[])
 
 
     // Libera os ponteiros
-
     DestruirLoja(L);
     DestruirMochila(M);
 
-    /*
-    fclose(arq);
-    free(tmp);
-    free(campos);
-    free(tmp1);
-
-    */
 }
