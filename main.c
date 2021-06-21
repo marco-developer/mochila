@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <ctype.h>
 #include "mochila_publica.h"
 
 
@@ -10,7 +9,7 @@ char* removeQuebra(char* linha)
     int tamLinha = strlen(linha);
     char* novo = (char*)malloc(tamLinha * sizeof(char));
     int j = 0;
-    for (unsigned int i = 0; i < strlen(linha); i++) {
+    for (int i = 0; i < strlen(linha); i++) {
         if (linha[i] != '\n') {
             memcpy(&novo[j], &linha[i], strlen(&linha[i]));
             j++;
@@ -19,20 +18,41 @@ char* removeQuebra(char* linha)
     }
     return novo;
 }
-
-int main(int argc, char *argv[])
+float * CriaVetor(int tamanho, int valorInicial, int Crescente)
 {
-    float cap;
-    //float cb[MAXLOJA];
+    float * vetor;
+    vetor = malloc(tamanho*sizeof(float));
+
+    // Define o passo de caimento de cada elemento do vetor
+    int fator;
+    fator = valorInicial/tamanho;
+
+    if (Crescente==1){
+        for (int i=0;i<tamanho;i++){
+            vetor[i] = fator + fator*i;
+        }
+    } else {
+        for (int i=0;i<tamanho;i++){
+            vetor[i] = valorInicial - fator*i;
+        }
+    }
+
+    return vetor;
+}
+
+void main(int argc, char *argv[])
+{
+    FILE *arq;
+    float cap, cb[MAXLOJA];
     int i=0, qtditens;
     const char delim[2] = " ";
     char line[MAXLOJA], *tmp, *campos[2*MAXLOJA], *tmp1;
-
-    
-
+    char *token;
     pLoja L = NULL;
     pMochila M = NULL;
 
+
+/*
     if(argc==1) {
         printf ("Argumentos insuficientes. Informe o nome do arquivo.");
         exit(1);  
@@ -54,8 +74,6 @@ int main(int argc, char *argv[])
 
     CriarLoja(&L, qtditens);
     CriarMochila(&M, cap);
-    
-    char *token;
 
     printf("\n==================================");
     printf("\nLENDO ARQUIVO:\n");
@@ -86,16 +104,69 @@ int main(int argc, char *argv[])
         AddLoja(L, j, valor[j], qtd_inicial[j]);
     }
 
-    // ImprimeLoja(L);
-    printf("################ ORDENAR LOJA ################\n");
-    OrdenarLoja(L);
-    printf("################ IMPRIME LOJA ################\n");
+*/
+
+
+
+
+
+
+
+    int *Resultado;
+
+    float * qdeInicial;
+    float * valor;
+
+    // Cria os elementos para serem inseridos na mochila
+    int numElementosDisponiveis;
+    numElementosDisponiveis = 50;
+
+    qdeInicial = CriaVetor(numElementosDisponiveis, 10, 0);
+    valor = CriaVetor(numElementosDisponiveis, 50, 1);
+    cap=10;
+
+    CriarLoja(&L, numElementosDisponiveis);
+    CriarMochila(&M, cap);
+
+    // Adiciona na Loja o array de pares valor/peso
+    for(int j=0;j<numElementosDisponiveis;j++) {
+
+        AddLoja(L, j, valor[j], qdeInicial[j]);
+        j=j+3;  // Para diminuir itens armazenados na loja
+    }
+    free(qdeInicial);
+    free(valor);
+
+
+
+
+
+
+
+
+
     ImprimeLoja(L);
-    printf("################ CARREGA MOCHILA ################\n");
+    OrdenarLoja(L);
+    ImprimeLoja(L);
     CarregaMochila(M, L);
-    printf("################ IMPRIME MOCHILA ################\n");
-    ImprimeMochila(M);
+    //ImprimeMochila(M);
     
 
-    return 0; 
+
+
+
+
+
+    // Libera os ponteiros
+
+    DestruirLoja(L);
+    DestruirMochila(M);
+
+    /*
+    fclose(arq);
+    free(tmp);
+    free(campos);
+    free(tmp1);
+
+    */
 }

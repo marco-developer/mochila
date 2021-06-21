@@ -94,7 +94,7 @@ int AddLoja(pLoja L, int ID, float valor, float QtdInicial){
     // reduz capacidade da loja
     L->CapacidadeDisponivel--;
     printf("Nova capacidade da loja: %.0f\n\n", L->CapacidadeDisponivel);
-    return 0;
+        
 }
 
 int ImprimeLoja(pLoja L) {
@@ -112,7 +112,7 @@ int ImprimeLoja(pLoja L) {
         printf("Valor total do item: %f\n", L->conteudo[i]->valor);
         printf("C/B do item: %f\n\n", L->conteudo[i]->cb);
     }
-    return 0;
+
 }
 
 int ImprimeMochila(pMochila M) {
@@ -130,7 +130,7 @@ int ImprimeMochila(pMochila M) {
         printf("Valor total do item: %f\n", M->conteudo[i]->valor);
         printf("C/B do item: %f\n\n", M->conteudo[i]->cb);
     }
-    return 0;
+
 }
 
 int OrdenarLoja(pLoja L) {
@@ -143,13 +143,13 @@ int OrdenarLoja(pLoja L) {
         for(j=0; j<i; j++){
 
             if(L->conteudo[j]->cb < L->conteudo[j+1]->cb) {
-                printf("Atual cb eh menor q proximo cb. Inverter\n");
+                //printf("Atual cb eh menor q proximo cb. Inverter\n");
 
                 aux = L->conteudo[j];
                 L->conteudo[j] = L->conteudo[j+1];
                 L->conteudo[j+1] = aux;
 
-                printf("Inversao ok\n\n");
+                //printf("Inversao ok\n\n");
             }
         }
     }
@@ -171,7 +171,14 @@ int CarregaMochila(pMochila M, pLoja L) {
         printf("Peso total item: %f\n", L->conteudo[i]->peso);
 
         if(L->conteudo[i]->peso!=0){
-            M->conteudo[i] = L->conteudo[i];
+
+            // Coloca na mochila os itens
+            // Ja estao organizados na loja do maior para menor
+            M->conteudo[i] = malloc(sizeof(item)); 
+            M->conteudo[i]->cb = L->conteudo[i]->cb; //M->conteudo[i] = L->conteudo[i];
+            M->conteudo[i]->idItem = L->conteudo[i]->idItem;
+            M->conteudo[i]->peso = L->conteudo[i]->peso;
+            M->conteudo[i]->valor = L->conteudo[i]->valor;
 
             if(M->CapacidadeDisponivel < L->conteudo[i]->peso) {
                 
@@ -216,10 +223,52 @@ int CarregaMochila(pMochila M, pLoja L) {
         } else i++;
     }
     
+    /*  APRESENTA ERROS NO VALGRIND!!
     printf("\nPeso\t\tPreco \n");
     for(i=0;i<=M->posicao;i++)
         printf("%f\t%f\n", M->conteudo[i]->peso, M->conteudo[i]->valor);
     printf("\nLucro maximo: %f\n", lucro);
-
+    */
 return 0;
+}
+
+int DestruirMochila(pMochila M){
+
+    // CONDICAO PARA SAIDA EM CASO DE MOCHILA INEXISTENTE??
+
+
+
+    // Se há elementos na mochila, remove todos
+    if (M->CapacidadeDisponivel != M->CapacidadeTotal){
+        for (int i=M->posicao;i>=0;i--){
+            M->CapacidadeDisponivel = M->CapacidadeDisponivel+M->conteudo[M->posicao]->peso;
+            free(M->conteudo[M->posicao]);
+            M->conteudo[M->posicao] = NULL;
+            M->posicao--;
+        }
+    }
+    free(M);
+    M = NULL;
+    return 0;
+}
+
+int DestruirLoja(pLoja L){
+    
+    // CONDICAO PARA SAIDA EM CASO DE LOJA INEXISTENTE??
+
+
+
+    // Se há elementos na loja, remove todos
+    if (L->CapacidadeDisponivel != L->CapacidadeTotal){
+        for (int i=L->posicao;i>=0;i--){
+            free(L->conteudo[L->posicao]);
+            L->conteudo[L->posicao] = NULL;
+            L->posicao--;
+            L->CapacidadeDisponivel++;
+        }
+    }
+
+    free(L);
+    L = NULL;
+    return 0;
 }
