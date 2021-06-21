@@ -5,15 +5,16 @@
 
 typedef struct item item;
 
-int OrdenarItems(Loja);
+int OrdenarLoja(pLoja L);
 int VerificaPeso(Mochila);
 
 typedef struct Mochila{
     
     float CapacidadeTotal;
     float CapacidadeDisponivel;
+    int posicao;
 
-    item *conteudo;
+    item *conteudo[MAXLOJA];
 }Mochila;
 
 struct item{
@@ -21,8 +22,7 @@ struct item{
     float peso;
     float valor;
     float cb;
-    item *ant;
-    item *prox;
+
 };
 
 #endif

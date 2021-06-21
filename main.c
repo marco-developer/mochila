@@ -25,9 +25,9 @@ void main(int argc, char *argv[])
     float cap, cb[MAXLOJA];
     int i=0, qtditens;
     const char delim[2] = " ";
-    char line[MAXLOJA], *tmp, *campos[2*MAXLOJA], *tmp1, *tmp2, *tmp3;
+    char line[MAXLOJA], *tmp, *campos[2*MAXLOJA], *tmp1;
     pLoja L = NULL;
-    pMochila bolsa = NULL;
+    pMochila M = NULL;
 
     if(argc==1) {
         printf ("Argumentos insuficientes. Informe o nome do arquivo.");
@@ -40,8 +40,8 @@ void main(int argc, char *argv[])
     printf ("Informe a capacidade da mochila: \n");
     scanf ("%f", &cap);
 
-    CriarMochila(&bolsa, cap);
     CriarLoja(&L, qtditens);
+    CriarMochila(&M, cap);
 
     arq = fopen(argv[1], "rt");
     
@@ -54,7 +54,7 @@ void main(int argc, char *argv[])
         
         fgets(line, sizeof line, arq); //recebe linha do arquivo 
         tmp1 = strdup(removeQuebra(line)); // remove quebra de linha
-        printf("Armazenando novo item... \n");
+        printf("Add item ao array... \n");
         tmp = strtok(tmp1, delim); //obtem primeiro elemento do arquivo
         
         while( tmp != NULL ) {
@@ -72,7 +72,11 @@ void main(int argc, char *argv[])
         j++;
     }
 
+    // ImprimeLoja(L);
+    OrdenarLoja(L);
     ImprimeLoja(L);
+    CarregaMochila(M, L);
+    ImprimeMochila(M);
     
     fclose(arq);
 }

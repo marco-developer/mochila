@@ -10,7 +10,7 @@ typedef Mochila * pMochila;
 typedef Loja * pLoja;
 
 int CriarMochila(pMochila *M, float CapacidadeTotal);
-int CarregaMochila(pMochila M, Loja *L);
+int CarregaMochila(pMochila M, pLoja L);
 int ImprimeMochila(pMochila M);
 int DestruirMochila(pMochila M);
 
