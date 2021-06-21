@@ -66,13 +66,13 @@ void main(int argc, char *argv[])
 	exit(1);
     }
 
-    printf ("Informe o numero de itens da Loja: ");
-    scanf ("%d", &qtditens);
+    // printf ("Informe o numero de itens da Loja: ");
+    // scanf ("%d", &qtditens);
 
     printf ("Informe a capacidade da mochila: ");
     scanf ("%f", &cap);
 
-    CriarLoja(&L, qtditens);
+    CriarLoja(&L, MAXLOJA);
     CriarMochila(&M, cap);
 
     printf("\n==================================");

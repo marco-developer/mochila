@@ -64,7 +64,7 @@ int CriarLoja(pLoja *L, float CapacidadeLoja) {
 
 }
 
-int AddLoja(pLoja L, int ID, float valor, float QtdInicial){
+int AddLoja(pLoja L, int ID, float valor, float peso){
 
     // verifica se ha espaco disponivel na loja
     // Para a Loja, a capacidade disponivel eh considerada em qtd de itens, diferente da mochila, que eh em peso.
@@ -82,20 +82,20 @@ int AddLoja(pLoja L, int ID, float valor, float QtdInicial){
         I->idItem = ID;
         printf("Valor do novo item = %.2f:\n", valor);
         I->valor = valor;
-        printf("Peso disponivel do novo item = %f:\n", QtdInicial);
-        I->peso = QtdInicial;
-        I->cb = valor/QtdInicial;
+        printf("Peso disponivel do novo item = %f:\n", peso);
+        I->peso = peso;
+        I->cb = valor/peso;
         printf("C/B do novo item = %.2f:\n", I->cb);
         
         // atualiza loja
         L->conteudo[L->posicao] = I;
         L->posicao++;
+
+        // reduz capacidade da loja
+        L->CapacidadeDisponivel--;
+        printf("Nova capacidade da loja: %.0f\n\n", L->CapacidadeDisponivel);
     }
-        
-    // reduz capacidade da loja
-    L->CapacidadeDisponivel--;
-    printf("Nova capacidade da loja: %.0f\n\n", L->CapacidadeDisponivel);
-        
+
 }
 
 int ImprimeLoja(pLoja L) {
@@ -162,10 +162,12 @@ int CarregaMochila(pMochila M, pLoja L) {
     int i = 0;
     float lucro = 0;
     float temp = 0;
+    float fracao = 0;
 
     printf("\nIniciando carregamento da mochila...\n\n");
     printf("Capacidade Disponivel = %f\n",M->CapacidadeDisponivel);
-    while(M->CapacidadeDisponivel!=0) {
+
+    while(M->CapacidadeDisponivel!=0 && L->CapacidadeDisponivel!=L->CapacidadeTotal) {
 
         printf("Cap. Mochila: %f\n", M->CapacidadeDisponivel);
         printf("Carregando item: %d\n", L->conteudo[i]->idItem);
@@ -187,11 +189,12 @@ int CarregaMochila(pMochila M, pLoja L) {
 
                 M->conteudo[i]->peso = M->CapacidadeDisponivel;
                 L->conteudo[i]->peso = L->conteudo[i]->peso - M->CapacidadeDisponivel;
-                
-                                
-                temp = M->conteudo[i]->valor * M->CapacidadeDisponivel;
+
+                temp = M->conteudo[i]->valor / M->CapacidadeDisponivel;
                 M->CapacidadeDisponivel = 0;
 
+
+                printf("Valor proporcional ao peso colocado: %f\n", temp);
                 lucro = lucro + temp;
                 M->posicao = i;
                 
@@ -201,6 +204,8 @@ int CarregaMochila(pMochila M, pLoja L) {
                 printf("Capacidade da mochila eh igual peso do item %d\n\n", L->conteudo[i]->idItem);
 
                 M->CapacidadeDisponivel = L->conteudo[i]->peso = 0;
+                L->posicao--;
+                L->CapacidadeDisponivel++;
 
                 lucro = lucro + M->conteudo[i]->valor;
                 M->posicao = i;
@@ -211,9 +216,11 @@ int CarregaMochila(pMochila M, pLoja L) {
                 printf("Capacidade da mochila eh maior que peso do item %d\n\n", L->conteudo[i]->idItem);
 
                 M->CapacidadeDisponivel = M->CapacidadeDisponivel - L->conteudo[i]->peso;
-                // printf("Peso analise item: %f\n", M->conteudo[i]->peso);
                 L->conteudo[i]->peso = 0;
+                L->posicao--;
+                L->CapacidadeDisponivel++;
 
+                printf("Valor proporcional ao peso colocado: %f\n", M->conteudo[i]->valor);
                 lucro = lucro + M->conteudo[i]->valor;
                 M->posicao = i;
                 
@@ -228,6 +235,7 @@ int CarregaMochila(pMochila M, pLoja L) {
     for(i=0;i<=M->posicao;i++)
         printf("%f\t%f\n", M->conteudo[i]->peso, M->conteudo[i]->valor);
     printf("\nLucro maximo: %f\n", lucro);
+    printf("Espaco restante na mochila %f\n", M->CapacidadeDisponivel);
     
 return 0;
 }
