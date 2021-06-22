@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "mochila_publica.h"
+#include "time.h"
 
 
 char* removeQuebra(char* linha)
@@ -100,9 +101,14 @@ void main(int argc, char *argv[])
     }
     
     // Adiciona na Loja o array de pares valor/peso
+    clock_t add_time;
+
+    add_time = clock();
     for(int j=0;j<i;j++) {
         AddLoja(L, j, valor[j], qtd_inicial[j]);
     }
+    add_time = clock() - add_time;
+
     fclose(arq);
 
 
@@ -148,13 +154,26 @@ void main(int argc, char *argv[])
 
 
     ImprimeLoja(L);
+    clock_t order_time;
+    order_time = clock();
     OrdenarLoja(L);
+    order_time = clock() - order_time;
     ImprimeLoja(L);
+    clock_t load_time;
+    load_time = clock();
     CarregaMochila(M, L);
+    load_time = clock() - load_time;
     //ImprimeMochila(M);
     
 
-
+    // Imprime tempos de execucao
+    printf("\nACAO EXECUTADA \t\t\tTEMPO (s)\n");
+    printf("-----------------------------------------\n");
+    printf("Adicionar itens na loja: \t%lf\n", ((double)add_time)/((CLOCKS_PER_SEC/1000)));
+    printf("Ordenar itens da loja: \t\t%lf\n", ((double)order_time)/((CLOCKS_PER_SEC/1000)));
+    printf("Carregar mochila: \t\t%lf\n", ((double)load_time)/((CLOCKS_PER_SEC/1000)));
+    printf("-----------------------------------------\n");
+    printf("TEMPO TOTAL: \t\t\t%lf\n", (((double)add_time+(double)order_time+(double)load_time)/((CLOCKS_PER_SEC/1000))));
 
 
 
