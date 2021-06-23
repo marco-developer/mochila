@@ -6,7 +6,6 @@
 int CriarMochila(pMochila *M, float CapacidadeTotal) {
         
     // Aloca espaco em memoria para mochila (2 dados do tipo inteiro para cada item)
-    // printf("Alocando memoria!\n");
     pMochila tmp_mochila = (pMochila) malloc(sizeof(Mochila));
 
     if(tmp_mochila == NULL){
@@ -20,13 +19,11 @@ int CriarMochila(pMochila *M, float CapacidadeTotal) {
     printf("Inicializando mochila!\n");
     tmp_mochila->CapacidadeTotal = CapacidadeTotal;
     tmp_mochila->CapacidadeDisponivel = CapacidadeTotal;
-    // tmp_mochila->inicio = NULL;
-    
+
     printf("Capacidade total da mochila: %f\n", tmp_mochila->CapacidadeTotal);
     printf("Capacidade disponivel na mochila: %f\n\n", tmp_mochila->CapacidadeDisponivel);
 
     // Atualiza ponteiro
-    // printf("Atualizando ponteiro da mochila de fora!\n");
     *M = tmp_mochila;
 
     return 0;
@@ -78,14 +75,14 @@ int AddLoja(pLoja L, int ID, float valor, float peso){
         item * I = (item*) malloc(sizeof(item));
         
         // armazena dados do item
-        printf("\nCriando novo item ID = %d:\n", ID);
+        printf("\nCriando novo item ID %d\n", ID);
         I->idItem = ID;
-        printf("Valor do novo item = %.2f:\n", valor);
+        printf("Valor do novo item: %.2f\n", valor);
         I->valor = valor;
-        printf("Peso disponivel do novo item = %f:\n", peso);
+        printf("Peso disponivel do novo item %f:\n", peso);
         I->peso = peso;
         I->cb = valor/peso;
-        printf("C/B do novo item = %.2f:\n", I->cb);
+        printf("C/B do novo item: %.2f\n", I->cb);
         
         // atualiza loja
         L->conteudo[L->posicao] = I;
@@ -94,6 +91,7 @@ int AddLoja(pLoja L, int ID, float valor, float peso){
         // reduz capacidade da loja
         L->CapacidadeDisponivel--;
         printf("Nova capacidade da loja: %.0f\n\n", L->CapacidadeDisponivel);
+        return 0;
     }
 
 }
@@ -113,7 +111,7 @@ int ImprimeLoja(pLoja L) {
         printf("Valor total do item: %f\n", L->conteudo[i]->valor);
         printf("C/B do item: %f\n\n", L->conteudo[i]->cb);
     }
-
+return 0;
 }
 
 int ImprimeMochila(pMochila M) {
@@ -131,14 +129,14 @@ int ImprimeMochila(pMochila M) {
         printf("Valor total do item: %f\n", M->conteudo[i]->valor);
         printf("C/B do item: %f\n\n", M->conteudo[i]->cb);
     }
-
+    return 0;
 }
 
 int OrdenarLoja(pLoja L) {
     int i, j;
     item *aux;
 
-    printf("Iniciando processo de ordenacao decrescente de c/b\n");
+    printf("Iniciando processo de ordenacao decrescente de C/B\n");
     for(i=L->posicao-1; i>0; i--){
     // tmp1 = proximo;
         for(j=0; j<i; j++){
@@ -185,7 +183,7 @@ int CarregaMochila(pMochila M, pLoja L) {
 
             if(M->CapacidadeDisponivel < L->conteudo[i]->peso) {
                 
-                printf("Capacidade da mochila eh menor que peso do item %d\n\n", L->conteudo[i]->idItem);
+                // printf("Capacidade da mochila eh menor que peso do item %d\n\n", L->conteudo[i]->idItem);
 
                 M->conteudo[i]->peso = M->CapacidadeDisponivel;
                 L->conteudo[i]->peso = L->conteudo[i]->peso - M->CapacidadeDisponivel;
@@ -194,14 +192,14 @@ int CarregaMochila(pMochila M, pLoja L) {
                 M->CapacidadeDisponivel = 0;
 
 
-                printf("Valor proporcional ao peso colocado: %f\n", temp);
+                // printf("Valor proporcional ao peso colocado: %f\n", temp);
                 lucro = lucro + temp;
                 M->posicao = i;
                 
                 i++;
                 
             }else if(M->CapacidadeDisponivel == L->conteudo[i]->peso){
-                printf("Capacidade da mochila eh igual peso do item %d\n\n", L->conteudo[i]->idItem);
+                // printf("Capacidade da mochila eh igual peso do item %d\n\n", L->conteudo[i]->idItem);
 
                 M->CapacidadeDisponivel = L->conteudo[i]->peso = 0;
                 L->posicao--;
@@ -213,14 +211,14 @@ int CarregaMochila(pMochila M, pLoja L) {
                 i++;
                 break;
             }else {
-                printf("Capacidade da mochila eh maior que peso do item %d\n\n", L->conteudo[i]->idItem);
+                // printf("Capacidade da mochila eh maior que peso do item %d\n\n", L->conteudo[i]->idItem);
 
                 M->CapacidadeDisponivel = M->CapacidadeDisponivel - L->conteudo[i]->peso;
                 L->conteudo[i]->peso = 0;
                 L->posicao--;
                 L->CapacidadeDisponivel++;
 
-                printf("Valor proporcional ao peso colocado: %f\n", M->conteudo[i]->valor);
+                // printf("Valor proporcional ao peso colocado: %f\n", M->conteudo[i]->valor);
                 lucro = lucro + M->conteudo[i]->valor;
                 M->posicao = i;
                 
@@ -243,7 +241,10 @@ return 0;
 int DestruirMochila(pMochila M){
 
     // CONDICAO PARA SAIDA EM CASO DE MOCHILA INEXISTENTE??
-
+    if(!M) {
+        printf("Mochila nao alocada!\n");
+        return 1;
+    }
 
 
     // Se há elementos na mochila, remove todos
@@ -263,7 +264,10 @@ int DestruirMochila(pMochila M){
 int DestruirLoja(pLoja L){
     
     // CONDICAO PARA SAIDA EM CASO DE LOJA INEXISTENTE??
-
+    if(!L) {
+        printf("Loja nao alocada!\n");
+        return 1;
+    }
 
 
     // Se há elementos na loja, remove todos
