@@ -41,16 +41,21 @@ float * CriaVetor(int tamanho, int valorInicial, int Crescente)
     return vetor;
 }
 
-int main(int argc, char *argv[])
+void main(int argc, char *argv[])
 {
 
-    float cap;
-    int i=0;
-    const char delim[2] = " ";
-    char line[MAXLOJA];
+    float cap, cb[MAXLOJA];
+    int i=0, qtditens;
+    char delim[] = ",";
+    char line[200];
     char *token;
     pLoja L = NULL;
     pMochila M = NULL;
+
+
+    double relogio_AdicionaLoja[100];
+    double relogio_OrdenaLoja[100];
+    double relogio_CarregaMochila[100];
 
 
 
@@ -70,8 +75,9 @@ int main(int argc, char *argv[])
     // printf ("Informe o numero de itens da Loja: ");
     // scanf ("%d", &qtditens);
 
-    printf ("Informe a capacidade da mochila: ");
-    scanf ("%f", &cap);
+    //printf ("Informe a capacidade da mochila: ");
+    //scanf ("%f", &cap);
+    cap=5;
 
     CriarLoja(&L, MAXLOJA);
     CriarMochila(&M, cap);
@@ -79,13 +85,17 @@ int main(int argc, char *argv[])
     printf("\n==================================");
     printf("\nLENDO ARQUIVO:\n");
     
-    float valor[MAXLOJA], qtd_inicial[MAXLOJA];
+    float valor[MAXLOJA], qtd_inicial[MAXLOJA], id[MAXLOJA];
     
     // Enquanto a linha não ser nula, fgets pega a linha
     while (fgets(line, sizeof(line), arq))
     {
         // Transforma a linha em uma string composta de tokens
         token = strtok(line, delim);
+        // Converte o primeiro token (id) em float e add no vetor
+        id[i] = strtod(token, NULL);
+        // Transforma a linha em uma string composta de tokens
+        token = strtok(NULL, delim);
         // Converte o primeiro token (valor) em float e add no vetor
         valor[i] = strtod(token, NULL);
         // Pega o segundo token...
@@ -93,6 +103,7 @@ int main(int argc, char *argv[])
         // E converte o segundo token (qtd_inicial) em float e add no vetor
         qtd_inicial[i] = strtod(token, NULL);
         i++;
+        if (i>MAXLOJA){break;}
     }
     
     printf("\nValor     Qtd_inicial:\n");
@@ -110,47 +121,6 @@ int main(int argc, char *argv[])
     add_time = clock() - add_time;
 
     fclose(arq);
-
-
-
-
-
-
-
-
-
-/*
-    int *Resultado;
-
-    float * qdeInicial;
-    float * valor;
-
-    // Cria os elementos para serem inseridos na mochila
-    int numElementosDisponiveis;
-    numElementosDisponiveis = 50;
-
-    qdeInicial = CriaVetor(numElementosDisponiveis, 10, 0);
-    valor = CriaVetor(numElementosDisponiveis, 50, 1);
-    cap=10;
-
-    CriarLoja(&L, numElementosDisponiveis);
-    CriarMochila(&M, cap);
-
-    // Adiciona na Loja o array de pares valor/peso
-    for(int j=0;j<numElementosDisponiveis;j++) {
-
-        AddLoja(L, j, valor[j], qdeInicial[j]);
-        j=j+3;  // Para diminuir itens armazenados na loja
-    }
-    free(qdeInicial);
-    free(valor);
-
-*/
-
-
-
-
-
 
 
     ImprimeLoja(L);
@@ -174,9 +144,6 @@ int main(int argc, char *argv[])
     printf("Carregar mochila: \t\t%lf\n", ((double)load_time)/((CLOCKS_PER_SEC/1000)));
     printf("-----------------------------------------\n");
     printf("TEMPO TOTAL: \t\t\t%lf\n", (((double)add_time+(double)order_time+(double)load_time)/((CLOCKS_PER_SEC/1000))));
-
-
-
 
     // Libera os ponteiros
     DestruirLoja(L);

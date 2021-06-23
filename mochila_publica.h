@@ -1,7 +1,7 @@
 #ifndef MOCHILA_PUBLICA
 #define MOCHILA_PUBLICA
 
-#define MAXLOJA 100
+#define MAXLOJA 1000000
 
 typedef struct Mochila Loja;
 typedef struct Mochila Mochila;
