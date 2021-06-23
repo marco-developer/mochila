@@ -132,6 +132,59 @@ int ImprimeMochila(pMochila M) {
     return 0;
 }
 
+
+int quicksort_r(pLoja L, int start, int end){
+    if (start>=end) {
+        return 0;
+    }
+    //item * aux;
+    item * swp;
+    
+    //int pivot=a[end];
+    item * pivot = L->conteudo[end];
+    //set a pointer to divide array into two parts
+    //one part is smaller than pivot and another larger
+    int pointer = start;
+    int i;
+    for (i=start; i<end; i++) {
+        //if (a[i]<pivot) {
+        if (L->conteudo[i]->cb > pivot->cb) {
+            if (pointer!=i) {
+                //swap a[i] with a[pointer]
+                //a[pointer] behind larger than pivot
+                
+                //swp = a[i];
+                swp = L->conteudo[i];
+                //a[i]=a[pointer];
+                L->conteudo[i] = L->conteudo[pointer];
+                //a[pointer]=swp;
+                L->conteudo[pointer] = swp;
+            }
+            pointer++;
+        }
+    }
+    //swap back pivot to proper position
+    //swp=a[end];
+    swp = L->conteudo[end];
+    //a[end]=a[pointer];
+    L->conteudo[end] = L->conteudo[pointer];
+    //a[pointer]=swp;
+    L->conteudo[pointer] = swp;
+    //quicksort_r(a,start,pointer-1);
+    quicksort_r(L, start, pointer-1);
+    //quicksort_r(a,pointer+1,end);
+    quicksort_r(L, pointer+1, end);
+    return 0;
+}
+
+
+int OrdenarLojaQuick(pLoja L) {
+    printf("Iniciando processo de ordenacao decrescente de C/B (QuickSort)\n");
+    quicksort_r(L, 0, L->posicao - 1);
+    return 0;
+}
+
+
 int OrdenarLoja(pLoja L) {
     int i, j;
     item *aux;
