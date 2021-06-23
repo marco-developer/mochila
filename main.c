@@ -41,11 +41,11 @@ float * CriaVetor(int tamanho, int valorInicial, int Crescente)
     return vetor;
 }
 
-void main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
 
-    float cap, cb[MAXLOJA];
-    int i=0, qtditens;
+    float cap;
+    int i=0;
     const char delim[2] = " ";
     char line[MAXLOJA];
     char *token;
