@@ -5,7 +5,7 @@
 
 typedef struct item item;
 
-int OrdenarLoja(pLoja L);
+int OrdenarLoja(pLoja L, int Exibe);
 int VerificaPeso(Mochila);
 
 typedef struct Mochila{

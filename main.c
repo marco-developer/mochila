@@ -116,22 +116,22 @@ void main(int argc, char *argv[])
 
     add_time = clock();
     for(int j=0;j<i;j++) {
-        AddLoja(L, j, valor[j], qtd_inicial[j]);
+        AddLoja(L, j, valor[j], qtd_inicial[j],0);
     }
     add_time = clock() - add_time;
 
     fclose(arq);
 
 
-    ImprimeLoja(L);
+    //ImprimeLoja(L);
     clock_t order_time;
     order_time = clock();
-    OrdenarLoja(L);
+    OrdenarLoja(L,0);
     order_time = clock() - order_time;
-    ImprimeLoja(L);
+    //ImprimeLoja(L);
     clock_t load_time;
     load_time = clock();
-    CarregaMochila(M, L);
+    CarregaMochila(M, L,0);
     load_time = clock() - load_time;
     //ImprimeMochila(M);
     
