@@ -37,28 +37,18 @@ float * CriaVetor(int tamanho, int valorInicial, int Crescente)
             vetor[i] = valorInicial - fator*i;
         }
     }
-
     return vetor;
 }
 
-void main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
 
-    float cap, cb[MAXLOJA];
-    int i=0, qtditens;
+    int i=0;
     char delim[] = ",";
     char line[200];
     char *token;
     int itens_lidos = 0;
     pLoja L = NULL;
     pMochila M = NULL;
-
-
-    double relogio_AdicionaLoja[100];
-    double relogio_OrdenaLoja[100];
-    double relogio_CarregaMochila[100];
-
-
 
     if(argc==1) {
         printf ("Argumentos insuficientes. Informe o nome do arquivo.");
@@ -78,11 +68,9 @@ void main(int argc, char *argv[])
 
     //printf ("Informe a capacidade da mochila: ");
     //scanf ("%f", &cap);
-    cap=5;
-
+    
     CriarLoja(&L, MAXLOJA);
-    CriarMochila(&M, cap);
-
+    
     printf("\n==================================");
     printf("\nLENDO ARQUIVO:\n");
     
@@ -108,10 +96,10 @@ void main(int argc, char *argv[])
     }
     itens_lidos = i;
     
-    printf("\nValor     Qtd_inicial:\n");
-    for (int i = 0; i < itens_lidos; i++) {
-        printf("%f %f\n", valor[i], qtd_inicial[i]);
-    }
+    // printf("\nValor     Qtd_inicial:\n");
+    // for (int i = 0; i < itens_lidos; i++) {
+    //     printf("%f %f\n", valor[i], qtd_inicial[i]);
+    // }
     
     // Adiciona na Loja o array de pares valor/peso
     clock_t add_time;
@@ -123,16 +111,18 @@ void main(int argc, char *argv[])
 
     fclose(arq);
 
+    CriarMochila(&M, L);
 
-    ImprimeLoja(L);
+    // ImprimeLoja(L);
+
     clock_t order_time;
     order_time = clock();
-
-    //OrdenarLoja(L);
-    OrdenarLojaQuick(L);
-
+    OrdenarLoja(L);
+    // OrdenarLojaQuick(L);
     order_time = clock() - order_time;
-    ImprimeLoja(L);
+
+    // ImprimeLoja(L);
+
     clock_t load_time;
     load_time = clock();
     CarregaMochila(M, L);
@@ -143,11 +133,11 @@ void main(int argc, char *argv[])
     // Imprime tempos de execucao
     printf("\nACAO EXECUTADA \t\t\tTEMPO (s)\n");
     printf("-----------------------------------------\n");
-    printf("Adicionar itens na loja: \t%lf\n", ((double)add_time)/((CLOCKS_PER_SEC/1000)));
-    printf("Ordenar itens da loja: \t\t%lf\n", ((double)order_time)/((CLOCKS_PER_SEC/1000)));
-    printf("Carregar mochila: \t\t%lf\n", ((double)load_time)/((CLOCKS_PER_SEC/1000)));
+    printf("Adicionar itens na loja: \t%lf\n", ((double)add_time)/((CLOCKS_PER_SEC)));
+    printf("Ordenar itens da loja: \t\t%lf\n", ((double)order_time)/((CLOCKS_PER_SEC)));
+    printf("Carregar mochila: \t\t%lf\n", ((double)load_time)/((CLOCKS_PER_SEC)));
     printf("-----------------------------------------\n");
-    printf("TEMPO TOTAL: \t\t\t%lf\n", (((double)add_time+(double)order_time+(double)load_time)/((CLOCKS_PER_SEC/1000))));
+    printf("TEMPO TOTAL: \t\t\t%lf\n", (((double)add_time+(double)order_time+(double)load_time)/((CLOCKS_PER_SEC))));
 
     // Libera os ponteiros
     DestruirLoja(L);

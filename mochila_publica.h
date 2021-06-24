@@ -1,15 +1,15 @@
 #ifndef MOCHILA_PUBLICA
 #define MOCHILA_PUBLICA
 
-#define MAXLOJA 1000000
+#define MAXLOJA 100000
 
-typedef struct Mochila Loja;
+typedef struct Loja Loja;
 typedef struct Mochila Mochila;
 
 typedef Mochila * pMochila;
 typedef Loja * pLoja;
 
-int CriarMochila(pMochila *M, float CapacidadeTotal);
+int CriarMochila(pMochila *M, pLoja L);
 int CarregaMochila(pMochila M, pLoja L);
 int ImprimeMochila(pMochila M);
 int DestruirMochila(pMochila M);

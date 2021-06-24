@@ -17,6 +17,16 @@ typedef struct Mochila{
     item *conteudo[MAXLOJA];
 }Mochila;
 
+typedef struct Loja{
+    
+    float CapacidadeTotal;
+    float CapacidadeDisponivel;
+    float PesoTotal;
+    int posicao;
+
+    item *conteudo[MAXLOJA];
+}Loja;
+
 struct item{
     int idItem;
     float peso;
