@@ -162,7 +162,7 @@ int main(int argc, char *argv[]) {
         printf(",tAddLoja=%lf",((double)add_time)/((CLOCKS_PER_SEC)));
         printf(",tOrdenarLoja=%lf",((double)order_time)/((CLOCKS_PER_SEC)));
         printf("tCarregaMochila=%lf", ((double)load_time)/((CLOCKS_PER_SEC)));
-        printf(",tTotal=%lf\n", (((double)add_time+(double)order_time+(double)load_time)/((CLOCKS_PER_SEC/1000))));
+        printf(",tTotal=%lf\n", ((double)add_time+(double)order_time+(double)load_time)/(CLOCKS_PER_SEC));
     }
 
 
