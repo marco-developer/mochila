@@ -63,7 +63,12 @@ int main(int argc, char *argv[]) {
 	exit(1);
     }
 
-    int ordenacao = atoi(argv[2]);
+    int ordenacao = 0;
+    if (argc>=3) { ordenacao = atoi(argv[2]);}
+
+    // Seleciona impressao dos dados
+    int Exibe = 1;
+    if (argc>=4) { Exibe = strtod(argv[3],NULL);}
 
     // printf ("Informe o numero de itens da Loja: ");
     // scanf ("%d", &qtditens);
@@ -71,10 +76,10 @@ int main(int argc, char *argv[]) {
     //printf ("Informe a capacidade da mochila: ");
     //scanf ("%f", &cap);
     
-    CriarLoja(&L, MAXLOJA);
+    CriarLoja(&L, MAXLOJA, Exibe);
     
-    printf("\n==================================");
-    printf("\nLENDO ARQUIVO:\n");
+    if (Exibe==1){printf("\n==================================");}
+    if (Exibe==1){printf("\nLENDO ARQUIVO:\n");}
     
     float valor[MAXLOJA], qtd_inicial[MAXLOJA], id[MAXLOJA];
     
@@ -107,45 +112,59 @@ int main(int argc, char *argv[]) {
     clock_t add_time;
     add_time = clock();
     for(int j=0;j<i;j++) {
-        AddLoja(L, j, valor[j], qtd_inicial[j]);
+        AddLoja(L, j, valor[j], qtd_inicial[j], Exibe);
     }
     add_time = clock() - add_time;
 
     fclose(arq);
 
-    CriarMochila(&M, L);
+    CriarMochila(&M, L, Exibe);
 
     //Ordena Loja
     
     clock_t order_time;
     order_time = clock();
-    if(ordenacao==0)
-        OrdenarLojaQuick(L);
-    else if(ordenacao==1)
-        OrdenarLojaBubble(L);
+    if(ordenacao==0){
+        if (Exibe==1){printf("\nAlgoritmo de ordenacao quick sort.\n");}
+        OrdenarLojaQuick(L, Exibe);}
+    else if(ordenacao==1){
+        if (Exibe==1){printf("\nAlgoritmo de ordenacao bubble sort.\n");}
+        OrdenarLojaBubble(L, Exibe);}
     else {
         printf("Metodo de ordenacao nao identificado! Saindo...\n");
         exit (1);
     }
     order_time = clock() - order_time;
 
-    // ImprimeLoja(L);
+    if (Exibe==1){ImprimeLoja(L);}
 
     clock_t load_time;
     load_time = clock();
-    CarregaMochila(M, L);
+    CarregaMochila(M, L, Exibe);
     load_time = clock() - load_time;
-    //ImprimeMochila(M);
+    if (Exibe==1){ImprimeMochila(M);}
     
 
     // Imprime tempos de execucao
-    printf("\nACAO EXECUTADA \t\t\tTEMPO (s)\n");
-    printf("-----------------------------------------\n");
-    printf("Adicionar itens na loja: \t%lf\n", ((double)add_time)/((CLOCKS_PER_SEC)));
-    printf("Ordenar itens da loja: \t\t%lf\n", ((double)order_time)/((CLOCKS_PER_SEC)));
-    printf("Carregar mochila: \t\t%lf\n", ((double)load_time)/((CLOCKS_PER_SEC)));
-    printf("-----------------------------------------\n");
-    printf("TEMPO TOTAL: \t\t\t%lf\n", (((double)add_time+(double)order_time+(double)load_time)/((CLOCKS_PER_SEC))));
+    if (Exibe==1){
+        printf("\nACAO EXECUTADA \t\t\tTEMPO (s)\n");
+        printf("-----------------------------------------\n");
+        printf("Adicionar itens na loja: \t%lf\n", ((double)add_time)/((CLOCKS_PER_SEC)));
+        printf("Ordenar itens da loja: \t\t%lf\n", ((double)order_time)/((CLOCKS_PER_SEC)));
+        printf("Carregar mochila: \t\t%lf\n", ((double)load_time)/((CLOCKS_PER_SEC)));
+        printf("-----------------------------------------\n");
+        printf("TEMPO TOTAL: \t\t\t%lf\n", (((double)add_time+(double)order_time+(double)load_time)/((CLOCKS_PER_SEC))));
+    } else {
+        if (ordenacao==0){
+            printf("\nQuickSort");
+        } else {printf("\nBubbleSort");}
+        printf(",n=%d",(int)MAXLOJA);
+        printf(",tAddLoja=%lf",((double)add_time)/((CLOCKS_PER_SEC)));
+        printf(",tOrdenarLoja=%lf",((double)order_time)/((CLOCKS_PER_SEC)));
+        printf("tCarregaMochila=%lf", ((double)load_time)/((CLOCKS_PER_SEC)));
+        printf(",tTotal=%lf\n", (((double)add_time+(double)order_time+(double)load_time)/((CLOCKS_PER_SEC/1000))));
+    }
+
 
     // Libera os ponteiros
     DestruirLoja(L);
