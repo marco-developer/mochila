@@ -63,6 +63,8 @@ int main(int argc, char *argv[]) {
 	exit(1);
     }
 
+    int ordenacao = atoi(argv[2]);
+
     // printf ("Informe o numero de itens da Loja: ");
     // scanf ("%d", &qtditens);
 
@@ -113,12 +115,18 @@ int main(int argc, char *argv[]) {
 
     CriarMochila(&M, L);
 
-    // ImprimeLoja(L);
-
+    //Ordena Loja
+    
     clock_t order_time;
     order_time = clock();
-    OrdenarLoja(L);
-    // OrdenarLojaQuick(L);
+    if(ordenacao==0)
+        OrdenarLojaQuick(L);
+    else if(ordenacao==1)
+        OrdenarLojaBubble(L);
+    else {
+        printf("Metodo de ordenacao nao identificado! Saindo...\n");
+        exit (1);
+    }
     order_time = clock() - order_time;
 
     // ImprimeLoja(L);

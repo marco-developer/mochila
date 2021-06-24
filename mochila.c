@@ -19,7 +19,7 @@ int CriarMochila(pMochila *M, pLoja L) {
 
     // Inicializa Mochila
     // OBS: Mochila remodelada para ter um header contendo capacidade total e disponível e um 
-    // ponteiro para primeiro elemento. Os elementos sao armazenados em forma de fila.
+    // vetor de conteudo para os elementos.
     printf("Inicializando mochila!\n");
     tmp_mochila->CapacidadeTotal = CapacidadeTotal;
     tmp_mochila->CapacidadeDisponivel = CapacidadeTotal;
@@ -35,9 +35,7 @@ int CriarMochila(pMochila *M, pLoja L) {
 
 int CriarLoja(pLoja *L, float CapacidadeLoja) {
 
-    // Funcoes CriarLoja e CriarMochila sao redundantes. Aprimorar.
-        
-    // Aloca espaco em memoria para Loja (2 dados do tipo inteiro para cada item)
+    // Aloca espaco em memoria para Loja
     // printf("Alocando memoria!\n");
     pLoja tmp_Loja = NULL;
     tmp_Loja = (pLoja) malloc(sizeof(Loja));
@@ -66,7 +64,7 @@ int CriarLoja(pLoja *L, float CapacidadeLoja) {
 
 int AddLoja(pLoja L, int ID, float valor, float peso){
 
-    // verifica se ha espaco disponivel na loja
+    // Verifica se ha espaco disponivel na loja
     // Para a Loja, a capacidade disponivel eh considerada em qtd de itens, diferente da mochila, que eh em peso.
     if(L->CapacidadeDisponivel==0) {
         printf("Sem espaco para alocar mais itens!\n");
@@ -107,7 +105,6 @@ int ImprimeLoja(pLoja L) {
     }
     
     printf("\nIniciando impressao da Loja\n");
-
     for(int i=0; i < L->posicao; i++){
         printf("ID item: %d\n", L->conteudo[i]->idItem);
         printf("Peso disponivel: %f\n", L->conteudo[i]->peso);
@@ -125,7 +122,6 @@ int ImprimeMochila(pMochila M) {
     }
     
     printf("\nIniciando impressao da Mochila\n");
-
     for(int i=0; i <=M->posicao; i++){
         printf("ID item: %d\n", M->conteudo[i]->idItem);
         printf("Peso: %f\n", M->conteudo[i]->peso);
@@ -170,19 +166,10 @@ int quicksort_r(pLoja L, int start, int end){
     return 0;
 }
 
-
-int OrdenarLojaQuick(pLoja L) {
-    printf("Iniciando processo de ordenacao decrescente de C/B (QuickSort)\n");
-    quicksort_r(L, 0, L->posicao - 1);
-    return 0;
-}
-
-
-int OrdenarLoja(pLoja L) {
+int bubblesort(pLoja L){
     int i, j;
     item *aux;
 
-    printf("Iniciando processo de ordenacao decrescente de C/B (BubbleSort)\n");
     for(i=L->posicao-1; i>0; i--){
         for(j=0; j<i; j++){
             if(L->conteudo[j]->cb < L->conteudo[j+1]->cb) {
@@ -196,11 +183,28 @@ int OrdenarLoja(pLoja L) {
     return 0;
 }
 
+int OrdenarLojaQuick(pLoja L) {
+
+    printf("Iniciando processo de ordenacao decrescente de C/B (QuickSort)\n");
+    quicksort_r(L, 0, L->posicao - 1);
+    return 0;
+}
+
+
+int OrdenarLojaBubble(pLoja L) {
+
+    printf("Iniciando processo de ordenacao decrescente de C/B (BubbleSort)\n");
+    bubblesort(L);
+
+    return 0;
+}
+
 int CarregaMochila(pMochila M, pLoja L) {
 
     int i = 0;
     float lucro = 0;
     float temp = 0;
+
 
     printf("\nIniciando carregamento da mochila...\n\n");
     printf("Capacidade Disponivel = %f\n",M->CapacidadeDisponivel);
