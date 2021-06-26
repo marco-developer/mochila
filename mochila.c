@@ -3,10 +3,14 @@
 #include <string.h>
 #include "mochila_privada.h"
 
-int CriarMochila(pMochila *M, pLoja L, int Exibe) {
+int CriarMochila(pMochila *M, pLoja L, float proporcao, int Exibe) {
         
-    float CapacidadeTotal = L->PesoTotal*0.5;
-
+    //Define capacidade total da mochila
+    if (Exibe==1){
+        printf("Proporcao Mochila/Loja: %f\n", proporcao);
+    }
+    float CapacidadeTotal = L->PesoTotal*proporcao;
+    
     // Aloca espaco em memoria para mochila (2 dados do tipo inteiro para cada item)
     pMochila tmp_mochila = NULL;
     tmp_mochila = (pMochila) calloc(1,sizeof(Mochila));
@@ -19,12 +23,17 @@ int CriarMochila(pMochila *M, pLoja L, int Exibe) {
     // Inicializa Mochila
     // OBS: Mochila remodelada para ter um header contendo capacidade total e disponível e um 
     // vetor de conteudo para os elementos.
-    if (Exibe==1){printf("Inicializando mochila!\n");}
+    if (Exibe==1){
+        printf("Inicializando mochila!\n");
+    }
+
     tmp_mochila->CapacidadeTotal = CapacidadeTotal;
     tmp_mochila->CapacidadeDisponivel = CapacidadeTotal;
 
-    if (Exibe==1){printf("Capacidade total da mochila: %f\n", tmp_mochila->CapacidadeTotal);}
-    if (Exibe==1){printf("Capacidade disponivel na mochila: %f\n\n", tmp_mochila->CapacidadeDisponivel);}
+    if (Exibe==1){
+        printf("Capacidade total da mochila: %f\n", tmp_mochila->CapacidadeTotal);
+        printf("Capacidade disponivel na mochila: %f\n\n", tmp_mochila->CapacidadeDisponivel);
+    }
 
     // Atualiza ponteiro
     *M = tmp_mochila;
@@ -35,7 +44,6 @@ int CriarMochila(pMochila *M, pLoja L, int Exibe) {
 int CriarLoja(pLoja *L, float CapacidadeLoja, int Exibe) {
 
     // Aloca espaco em memoria para Loja
-    // printf("Alocando memoria!\n");
     pLoja tmp_Loja = NULL;
     tmp_Loja = (pLoja) calloc(1,sizeof(Loja));
 
@@ -45,16 +53,20 @@ int CriarLoja(pLoja *L, float CapacidadeLoja, int Exibe) {
     }
 
     // Inicializa Loja
-    if (Exibe==1){printf("Inicializando Loja!\n");}
+    if (Exibe==1){
+        printf("Inicializando Loja!\n");
+    }
+
     tmp_Loja->CapacidadeTotal = CapacidadeLoja;
     tmp_Loja->CapacidadeDisponivel = CapacidadeLoja;
     tmp_Loja->posicao = 0;
     
-    if (Exibe==1){printf("Capacidade total da Loja: %f\n", tmp_Loja->CapacidadeTotal);}
-    if (Exibe==1){printf("Capacidade disponivel na Loja: %f\n\n", tmp_Loja->CapacidadeDisponivel);}
+    if (Exibe==1){
+        printf("Capacidade total da Loja: %f\n", tmp_Loja->CapacidadeTotal);
+        printf("Capacidade disponivel na Loja: %f\n\n", tmp_Loja->CapacidadeDisponivel);
+    }
 
     // Atualiza ponteiro
-    // printf("Atualizando ponteiro da Loja de fora!\n");
     *L = tmp_Loja;
 
     return 0;
@@ -66,32 +78,38 @@ int AddLoja(pLoja L, int ID, float valor, float peso, int Exibe){
     // Verifica se ha espaco disponivel na loja
     // Para a Loja, a capacidade disponivel eh considerada em qtd de itens, diferente da mochila, que eh em peso.
     if(L->CapacidadeDisponivel==0) {
-        if (Exibe==1){printf("Sem espaco para alocar mais itens!\n");}
+        if (Exibe==1){
+            printf("Sem espaco para alocar mais itens!\n");
+        }
         return 1;
     } else {
-
         //aloca struct para item
-        // item * I = (item*) malloc(sizeof(item));
         L->conteudo[L->posicao] = calloc(1,sizeof(item));
         
         // armazena dados do item
-        if (Exibe==1){printf("\nCriando novo item ID %d\n", ID);}
         L->conteudo[L->posicao]->idItem = ID;
-        if (Exibe==1){printf("Valor do novo item: %.2f\n", valor);}
         L->conteudo[L->posicao]->valor = valor;
-        if (Exibe==1){printf("Peso disponivel do novo item %f:\n", peso);}
         L->conteudo[L->posicao]->peso = peso;
         L->conteudo[L->posicao]->cb = valor/peso;
-        if (Exibe==1){printf("C/B do novo item: %.2f\n", L->conteudo[L->posicao]->cb);}
-        
+
+        if (Exibe==1){
+            printf("\nCriando novo item ID %d\n", L->conteudo[L->posicao]->idItem);
+            printf("Valor do novo item: %.2f\n", L->conteudo[L->posicao]->valor);
+            printf("Peso disponivel do novo item %f:\n", L->conteudo[L->posicao]->peso);
+            printf("C/B do novo item: %.2f\n", L->conteudo[L->posicao]->cb);
+        }
+
         // atualiza loja
-        //L->conteudo[L->posicao] = I;
         L->PesoTotal = L->PesoTotal + L->conteudo[L->posicao]->peso;
         L->posicao++;
 
         // reduz capacidade da loja
         L->CapacidadeDisponivel--;
-        if (Exibe==1){printf("Nova capacidade da loja: %.0f\n\n", L->CapacidadeDisponivel);}
+        
+        if (Exibe==1){
+            printf("Nova capacidade da loja: %.0f\n\n", L->CapacidadeDisponivel);
+        }
+
         return 0;
     }
 
@@ -174,7 +192,6 @@ int bubblesort(pLoja L){
     for(i=L->posicao-1; i>0; i--){
         for(j=0; j<i; j++){
             if(L->conteudo[j]->cb < L->conteudo[j+1]->cb) {
-                //printf("Atual cb eh menor q proximo cb. Inverter\n");
                 aux = L->conteudo[j];
                 L->conteudo[j] = L->conteudo[j+1];
                 L->conteudo[j+1] = aux;
@@ -207,21 +224,25 @@ int CarregaMochila(pMochila M, pLoja L, int Exibe) {
     float temp = 0;
 
 
-    if (Exibe==1){printf("\nIniciando carregamento da mochila...\n\n");}
-    if (Exibe==1){printf("Capacidade Disponivel = %f\n",M->CapacidadeDisponivel);}
+    if (Exibe==1){
+        printf("\nIniciando carregamento da mochila...\n\n");
+        printf("Capacidade Disponivel = %f\n",M->CapacidadeDisponivel);
+    }
 
     while(M->CapacidadeDisponivel!=0 && L->CapacidadeDisponivel!=L->CapacidadeTotal) {
 
-        if (Exibe==1){printf("Cap. Mochila: %f\n", M->CapacidadeDisponivel);}
-        if (Exibe==1){printf("Carregando item: %d\n", L->conteudo[i]->idItem);}
-        if (Exibe==1){printf("Peso total item: %f\n", L->conteudo[i]->peso);}
+        if (Exibe==1){
+            printf("Cap. Mochila: %f\n", M->CapacidadeDisponivel);
+            printf("Carregando item: %d\n", L->conteudo[i]->idItem);
+            printf("Peso total item: %f\n", L->conteudo[i]->peso);
+        }
 
         if(L->conteudo[i]->peso!=0){
 
             // Coloca na mochila os itens
             // Ja estao organizados na loja do maior para menor
             M->conteudo[i] = calloc(1,sizeof(item)); 
-            M->conteudo[i]->cb = L->conteudo[i]->cb; //M->conteudo[i] = L->conteudo[i];
+            M->conteudo[i]->cb = L->conteudo[i]->cb;
             M->conteudo[i]->idItem = L->conteudo[i]->idItem;
             M->conteudo[i]->peso = L->conteudo[i]->peso;
             M->conteudo[i]->valor = L->conteudo[i]->valor;
@@ -268,18 +289,24 @@ int CarregaMochila(pMochila M, pLoja L, int Exibe) {
     }
     if (Exibe==1){printf("\nPeso\t\tPreco \n");}
     for(i=0;i<=M->posicao;i++)
-        if (Exibe==1){printf("%f\t%f\n", M->conteudo[i]->peso, M->conteudo[i]->valor);}
-        if (Exibe==1){printf("\nLucro maximo: %f\n", lucro);}
-        if (Exibe==1){printf("Espaco restante na mochila %f\n", M->CapacidadeDisponivel);}
+        if (Exibe==1){
+            printf("%f\t%f\n", M->conteudo[i]->peso, M->conteudo[i]->valor);
+            printf("\nLucro maximo: %f\n", lucro);
+            printf("Espaco restante na mochila %f\n", M->CapacidadeDisponivel);
+        }
     return 0;
 }
 
-int DestruirMochila(pMochila M){
+int DestruirMochila(pMochila M, int Exibe){
 
     // CONDICAO PARA SAIDA EM CASO DE MOCHILA INEXISTENTE
     if(!M) {
         printf("Mochila nao alocada!\n");
         return 1;
+    }
+
+    if (Exibe == 1){
+        printf("\nIniciando destruicao da Mochila.\n");
     }
 
     // Se há elementos na mochila, remove todos
@@ -291,8 +318,14 @@ int DestruirMochila(pMochila M){
             M->posicao--;
         }
     }
+
     free(M);
     M = NULL;
+
+    if (Exibe == 1 && !M){
+        printf("\nMochila destruida com sucesso.\n");
+    }
+
     return 0;
 }
 
@@ -303,7 +336,11 @@ int DestruirLoja(pLoja L, int Exibe){
         printf("Loja nao alocada!\n");
         return 1;
     }
-    if (Exibe == 1){printf("\nIniciando destruicao da Loja.\n");}
+    
+    if (Exibe == 1){
+        printf("\nIniciando destruicao da Loja.\n");
+    }
+
     // Se há elementos na loja, remove todos
     if (L->CapacidadeDisponivel != L->CapacidadeTotal){
         for (int i=0;i<MAXLOJA;i++){//(int i=L->posicao;i>=0;i--){//(int i=MAXLOJA-2;i>=0;i--){
@@ -315,5 +352,10 @@ int DestruirLoja(pLoja L, int Exibe){
     L->CapacidadeDisponivel=L->CapacidadeTotal;
     free(L);
     L = NULL;
+
+    if (Exibe == 1 && !L){
+        printf("\nLoja destruida com sucesso.\n");
+    }
+
     return 0;
 }
