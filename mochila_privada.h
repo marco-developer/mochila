@@ -3,10 +3,10 @@
 
 #include "mochila_publica.h"
 
-typedef struct item item;
+int quicksort_r(pLoja L, int start, int end);
+int bubblesort(pLoja L);
 
-int OrdenarLoja(pLoja L, int Exibe);
-int VerificaPeso(Mochila);
+typedef struct item item;
 
 typedef struct Mochila{
     
@@ -16,6 +16,16 @@ typedef struct Mochila{
 
     item *conteudo[MAXLOJA];
 }Mochila;
+
+typedef struct Loja{
+    
+    float CapacidadeTotal;
+    float CapacidadeDisponivel;
+    float PesoTotal;
+    int posicao;
+
+    item *conteudo[MAXLOJA];
+}Loja;
 
 struct item{
     int idItem;
