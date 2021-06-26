@@ -84,29 +84,38 @@ int main(int argc, char *argv[]) {
     float valor[MAXLOJA], qtd_inicial[MAXLOJA], id[MAXLOJA];
     
     // Enquanto a linha não ser nula, fgets pega a linha
-    while (fgets(line, sizeof(line), arq))
-    {
-        // Transforma a linha em uma string composta de tokens
-        token = strtok(line, delim);
-        // Converte o primeiro token (id) em float e add no vetor
-        id[i] = strtod(token, NULL);
-        // Transforma a linha em uma string composta de tokens
-        token = strtok(NULL, delim);
-        // Converte o primeiro token (valor) em float e add no vetor
-        valor[i] = strtod(token, NULL);
-        // Pega o segundo token...
-        token = strtok(NULL, delim);
-        // E converte o segundo token (qtd_inicial) em float e add no vetor
-        qtd_inicial[i] = strtod(token, NULL);
-        i++;
-        if (i>MAXLOJA){break;}
+    int Vetor = 0;
+    if (argc>=5) {Vetor = atoi(argv[4]);}
+    if (Vetor==0){
+	    while (fgets(line, sizeof(line), arq))
+	    {
+		// Transforma a linha em uma string composta de tokens
+		token = strtok(line, delim);
+		// Converte o primeiro token (id) em float e add no vetor
+		id[i] = strtod(token, NULL);
+		// Transforma a linha em uma string composta de tokens
+		token = strtok(NULL, delim);
+		// Converte o primeiro token (valor) em float e add no vetor
+		valor[i] = strtod(token, NULL);
+		// Pega o segundo token...
+		token = strtok(NULL, delim);
+		// E converte o segundo token (qtd_inicial) em float e add no vetor
+		qtd_inicial[i] = strtod(token, NULL);
+		i++;
+		if (i>MAXLOJA){break;}
+	    }
+    	    itens_lidos = i;
+    } else if (Vetor == 1) {
+	    CriaVetor(id, MAXLOJA, 0, MAXLOJA, 1);
+	    CriaVetor(valor, MAXLOJA, 10, 1000, 1);
+	    CriaVetor(qtd_inicial, MAXLOJA, 100, 1000, 1);
+	    i=MAXLOJA-1;
+    } else {
+	    CriaVetor(id, MAXLOJA, 0, MAXLOJA, 1);
+	    CriaVetor(valor, MAXLOJA, 10, 1000, 0);
+	    CriaVetor(qtd_inicial, MAXLOJA, 100, 1000, 1);
+	    i=MAXLOJA-1;
     }
-    itens_lidos = i;
-    
-    // printf("\nValor     Qtd_inicial:\n");
-    // for (int i = 0; i < itens_lidos; i++) {
-    //     printf("%f %f\n", valor[i], qtd_inicial[i]);
-    // }
     
     // Adiciona na Loja o array de pares valor/peso
     clock_t add_time;
