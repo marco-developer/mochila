@@ -8,8 +8,8 @@ int CriarMochila(pMochila *M, pLoja L, int Exibe) {
     float CapacidadeTotal = L->PesoTotal*0.5;
 
     // Aloca espaco em memoria para mochila (2 dados do tipo inteiro para cada item)
-    pMochila tmp_mochila;
-    tmp_mochila = malloc(sizeof(Mochila));
+    pMochila tmp_mochila = NULL;
+    tmp_mochila = (pMochila) calloc(1,sizeof(Mochila));
 
     if(tmp_mochila == NULL){
         printf("Erro: Falha na alocacao de memoria!\n");
@@ -36,8 +36,8 @@ int CriarLoja(pLoja *L, float CapacidadeLoja, int Exibe) {
 
     // Aloca espaco em memoria para Loja
     // printf("Alocando memoria!\n");
-    pLoja tmp_Loja;
-    tmp_Loja = malloc(sizeof(Loja));
+    pLoja tmp_Loja = NULL;
+    tmp_Loja = (pLoja) calloc(1,sizeof(Loja));
 
     if(tmp_Loja == NULL){
         printf("Erro: Falha na alocacao de memoria!\n");
@@ -72,7 +72,7 @@ int AddLoja(pLoja L, int ID, float valor, float peso, int Exibe){
 
         //aloca struct para item
         // item * I = (item*) malloc(sizeof(item));
-        L->conteudo[L->posicao] = malloc(sizeof(item));
+        L->conteudo[L->posicao] = calloc(1,sizeof(item));
         
         // armazena dados do item
         if (Exibe==1){printf("\nCriando novo item ID %d\n", ID);}
@@ -137,8 +137,9 @@ int quicksort_r(pLoja L, int start, int end){
         return 0;
     }
 
-    item * swp;
-    item * pivot = L->conteudo[end];
+    item * swp = NULL;
+    item * pivot = NULL;
+    pivot = L->conteudo[end];
 
     //set a pointer to divide array into two parts
     //one part is smaller than pivot and another larger
@@ -168,7 +169,7 @@ int quicksort_r(pLoja L, int start, int end){
 
 int bubblesort(pLoja L){
     int i, j;
-    item *aux;
+    item *aux = NULL;
 
     for(i=L->posicao-1; i>0; i--){
         for(j=0; j<i; j++){
@@ -219,7 +220,7 @@ int CarregaMochila(pMochila M, pLoja L, int Exibe) {
 
             // Coloca na mochila os itens
             // Ja estao organizados na loja do maior para menor
-            M->conteudo[i] = malloc(sizeof(item)); 
+            M->conteudo[i] = calloc(1,sizeof(item)); 
             M->conteudo[i]->cb = L->conteudo[i]->cb; //M->conteudo[i] = L->conteudo[i];
             M->conteudo[i]->idItem = L->conteudo[i]->idItem;
             M->conteudo[i]->peso = L->conteudo[i]->peso;
