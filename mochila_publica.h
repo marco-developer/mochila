@@ -1,5 +1,4 @@
 #ifndef MOCHILA_PUBLICA
-#define MOCHILA_PUBLICA
 
 #define MAXLOJA 150000
 

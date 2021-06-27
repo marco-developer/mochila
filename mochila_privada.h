@@ -1,5 +1,4 @@
 #ifndef MOCHILA_PRIVADA
-#define MOCHILA_PRIVADA
 
 #include "mochila_publica.h"
 
