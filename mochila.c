@@ -343,9 +343,9 @@ int DestruirLoja(pLoja L, int Exibe){
 
     // Se há elementos na loja, remove todos
     if (L->CapacidadeDisponivel != L->CapacidadeTotal){
-        for (int i=0;i<MAXLOJA;i++){//(int i=L->posicao;i>=0;i--){//(int i=MAXLOJA-2;i>=0;i--){
-            free(L->conteudo[i]);//free(L->conteudo[L->posicao]);
-            L->conteudo[i] = NULL;//L->conteudo[L->posicao] = NULL;
+        for (int i=0;i<MAXLOJA;i++){
+            free(L->conteudo[i]);
+            L->conteudo[i] = NULL;
         }
     }
     L->posicao=0;
