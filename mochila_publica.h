@@ -16,8 +16,8 @@ int DestruirMochila(pMochila M, int Exibe);
 
 int CriarLoja(pLoja *L, float CapacidadeLoja, int Exibe);
 int AddLoja(pLoja L, int ID, float valor, float QtdInicial, int Exibe);
-int OrdenarLojaBubble(pLoja L, int Exibe);
-int OrdenarLojaQuick(pLoja L, int Exibe);
+int BubbleSortLoja(pLoja L, int Exibe);
+int QuickSortLoja(pLoja L, int Exibe);
 int ImprimeLoja(pLoja L);
 int DestruirLoja(pLoja L, int Exibe);
 

@@ -1,8 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "mochila_publica.h"
 #include "time.h"
+
+#include "mochila_publica.h"
+
 
 char* removeQuebra(char* linha)
 {
@@ -123,12 +125,12 @@ int main(int argc, char *argv[]) {
         if (Exibe==1){
             printf("\nAlgoritmo de ordenacao quick sort.\n");
         }
-        OrdenarLojaQuick(L, Exibe);
+        QuickSortLoja(L, Exibe);
     } else if(ordenacao==1){
         if (Exibe==1){
             printf("\nAlgoritmo de ordenacao bubble sort.\n");
         }
-        OrdenarLojaBubble(L, Exibe);
+        BubbleSortLoja(L, Exibe);
     } else {
         printf("Metodo de ordenacao nao identificado! Saindo...\n");
         exit (1);

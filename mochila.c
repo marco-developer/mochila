@@ -201,19 +201,23 @@ int bubblesort(pLoja L){
     return 0;
 }
 
-int OrdenarLojaQuick(pLoja L, int Exibe) {
+int QuickSortLoja(pLoja L, int Exibe) {
 
-    if (Exibe==1){printf("Iniciando processo de ordenacao decrescente de C/B (QuickSort)\n");}
+    if (Exibe==1){
+        printf("Iniciando processo de ordenacao decrescente de C/B (QuickSort)\n");
+    }
+
     quicksort_r(L, 0, L->posicao - 1);
     return 0;
 }
 
+int BubbleSortLoja(pLoja L, int Exibe) {
 
-int OrdenarLojaBubble(pLoja L, int Exibe) {
+    if (Exibe==1){
+        printf("Iniciando processo de ordenacao decrescente de C/B (BubbleSort)\n");
+    }
 
-    if (Exibe==1){printf("Iniciando processo de ordenacao decrescente de C/B (BubbleSort)\n");}
     bubblesort(L);
-
     return 0;
 }
 
@@ -287,13 +291,14 @@ int CarregaMochila(pMochila M, pLoja L, int Exibe) {
             }
         } else i++;
     }
-    if (Exibe==1){printf("\nPeso\t\tPreco \n");}
-    for(i=0;i<=M->posicao;i++)
-        if (Exibe==1){
+    if (Exibe==1){
+        printf("\nPeso\t\tPreco \n");
+        for(i=0;i<=M->posicao;i++){
             printf("%f\t%f\n", M->conteudo[i]->peso, M->conteudo[i]->valor);
             printf("\nLucro maximo: %f\n", lucro);
             printf("Espaco restante na mochila %f\n", M->CapacidadeDisponivel);
         }
+    }
     return 0;
 }
 
