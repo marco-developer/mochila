@@ -1,4 +1,4 @@
-#ifndef MOCHILA_PRIVADA
+// #ifndef MOCHILA_PRIVADA
 
 #include "mochila_publica.h"
 
@@ -34,4 +34,4 @@ struct item{
 
 };
 
-#endif
+// #endif

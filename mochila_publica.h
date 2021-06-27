@@ -1,4 +1,4 @@
-#ifndef MOCHILA_PUBLICA
+// #ifndef MOCHILA_PUBLICA
 
 #define MAXLOJA 150000
 
@@ -20,4 +20,4 @@ int QuickSortLoja(pLoja L, int Exibe);
 int ImprimeLoja(pLoja L);
 int DestruirLoja(pLoja L, int Exibe);
 
-#endif
+// #endif
