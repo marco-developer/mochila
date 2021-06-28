@@ -78,6 +78,16 @@ sendo:
     - 0: Exibe debug
     - 1: Omite debug
 
+A execução do main irá percorrer as seguintes etapas:
+    - Criar a Loja
+    - Criar os vetores de entrada
+    - Adicionar os itens coletados à loja
+    - Criar a Mochila
+    - Ordenar a Loja
+    - Carregar a Mochila
+    - Imprimir as estatísticas da execução
+    - Destruir a Loja
+    - Destruir a Mochila
 # Mochila.c
 Contém os códigos do TDA Mochila, com as seguintes funções:
 
