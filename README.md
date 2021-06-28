@@ -11,7 +11,7 @@ O trabalho é composto pelos seguintes arquivos:
 
 O problema da mochila fracionária envolve uma situação hipotética, na qual há uma loja que contém determinado conjunto de itens. Um ladrão possui uma mochila que pode carregar um peso menor que o disponível na loja. Assim, a questão proposta é: Com quais itens e seus respectivos pesos o ladrão deve preencher a mochila, de modo a maximizar o lucro?
 
-Para solução do problema, foram criados três tipos de dados: Item, Loja e Mochila, conforme abaixo:
+Para solução do problema, deve-se ordenar os itens disponíveis na loja, em ordem decrescente de \<peso>/\<valor>. Para isso foram criados três tipos de dados: Item, Loja e Mochila, conforme abaixo:
 
 ```
 struct item{
@@ -46,7 +46,8 @@ Os tipos de dados Mochila e Loja são similares, tendo como diferencial o campo 
 
 O tipo de dado item representa o item, e possui os campos \<id do item>, \<peso do item> e \<valor total>, além de um campo \<cb>, que representa o custo benefício do item, dado por \<valor>/\<peso inicial>.
 
-O primeiro passo da execução envolve a criação de três vetores (valor, qtd_inicial e id), contendo as informações referentes aos itens, presentes no arquivo de entrada.
+O primeiro passo da execução envolve a criação da Loja, e em seguida é realizada a coleta das informações contidas no arquivo de entrada, com as quais são criados três vetores: valor, qtd_inicial e id.
+
 Após a criação dos vetores, é realizado um laço for, para adicionar os itens coletados à Loja:
 
 ```
@@ -55,6 +56,7 @@ Após a criação dos vetores, é realizado um laço for, para adicionar os iten
     }
 ```
 
+Em seguida é realizada a criação da Mochila e ordenação do vetor de itens da Loja, 
 
 # Main
 A aplicação main deve ser executada da seguinte forma:
