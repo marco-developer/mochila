@@ -11,7 +11,7 @@ O trabalho é composto pelos seguintes arquivos:
 
 O problema da mochila fracionária envolve uma situação hipotética, na qual há uma loja que contém determinado conjunto de itens. Um ladrão possui uma mochila que pode carregar um peso menor que o disponível na loja. Assim, a questão proposta é: Com quais itens e seus respectivos pesos o ladrão deve preencher a mochila, de modo a maximizar o lucro?
 
-Para solução do problema, deve-se ordenar os itens disponíveis na loja, em ordem decrescente de \<peso>/\<valor> e, utilizando uma abordagem gulosa, preencher a mochila com o maior peso possível dos itens com maior \<peso>/\<valor>. 
+Para solução do problema, deve-se ordenar os itens disponíveis na loja, em ordem decrescente de \<valor>/\<peso> e, utilizando uma abordagem gulosa, preencher a mochila com o maior peso possível dos itens com maior \<valor>/\<peso>. 
 
 ## Implementação
 
