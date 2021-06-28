@@ -11,7 +11,7 @@ O trabalho é composto pelos seguintes arquivos:
 
 # Main
 A aplicação main deve ser executada da seguinte forma:
-  ./main <arquivo de entrada> <tipo de ordenação> <modo debug>
+  ./main '<arquivo de entrada>' '<tipo de ordenação>' '<modo debug>'
  
 sendo:
   - <arquivo de entrada>: arquivo de entrada contendo os itens a serem carregados na loja e utilizados durante a execução. Cada linha do arquivo representa um item, sendo composta por:
