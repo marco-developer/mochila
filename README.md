@@ -101,5 +101,6 @@ Contém os códigos do TDA Mochila, com as seguintes funções:
 
 - int CarregaMochila(pMochila M, pLoja L, int Exibe): Executa a função gulosa, que carrega a mochila com os itens de maior \<cb> presentes na loja L.
 
-- int DestruirMochila(pMochila M, int Exibe)
-- int DestruirLoja(pLoja L, int Exibe)
+- int DestruirMochila(pMochila M, int Exibe): Desaloca a memória referente aos itens e à mochila M.
+
+- int DestruirLoja(pLoja L, int Exibe): Desaloca a memória referente aos itens e à loja L.
