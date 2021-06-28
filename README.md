@@ -13,6 +13,8 @@ O problema da mochila fracionária envolve uma situação hipotética, na qual h
 
 Para solução do problema, deve-se ordenar os itens disponíveis na loja, em ordem decrescente de \<peso>/\<valor> e, utilizando uma abordagem gulosa, preencher a mochila com o maior peso possível dos itens com maior \<peso>/\<valor>. 
 
+## Implementação
+
 A implementação envolveu a criação de três tipos de dados: Item, Loja e Mochila, conforme abaixo:
 
 ```
@@ -79,5 +81,15 @@ sendo:
 # Mochila.c
 Contém os códigos do TDA Mochila, com as seguintes funções:
 
-## CriarMochila
-## CriarLoja
+- int CriarMochila(pMochila \*M, pLoja L, float proporcao, int Exibe)
+- int CriarLoja(pLoja \*L, float CapacidadeLoja, int Exibe)
+- int AddLoja(pLoja L, int ID, float valor, float peso, int Exibe)
+- int ImprimeLoja(pLoja L)
+- int ImprimeMochila(pMochila M)
+- int quicksort_r(pLoja L, int start, int end)
+- int bubblesort(pLoja L)
+- int QuickSortLoja(pLoja L, int Exibe)
+- int BubbleSortLoja(pLoja L, int Exibe)
+- int CarregaMochila(pMochila M, pLoja L, int Exibe)
+- int DestruirMochila(pMochila M, int Exibe)
+- int DestruirLoja(pLoja L, int Exibe)
