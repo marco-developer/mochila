@@ -46,6 +46,15 @@ Os tipos de dados Mochila e Loja são similares, tendo como diferencial o campo 
 
 O tipo de dado item representa o item, e possui os campos \<id do item>, \<peso do item> e \<valor total>, além de um campo \<cb>, que representa o custo benefício do item, dado por \<valor>/\<peso inicial>.
 
+O primeiro passo da execução envolve a criação de três vetores (valor, qtd_inicial e id), contendo as informações referentes aos itens, presentes no arquivo de entrada.
+Após a criação dos vetores, é realizado um laço for, para adicionar os itens coletados à Loja:
+
+```
+    for(int j=0;j<i;j++) {
+        AddLoja(L, id[i], valor[j], qtd_inicial[j], Exibe);
+    }
+```
+
 
 # Main
 A aplicação main deve ser executada da seguinte forma:
