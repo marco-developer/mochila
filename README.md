@@ -42,6 +42,10 @@ typedef struct Mochila{
 }Mochila;
 ```
 
+Os tipos de dados Mochila e Loja são similares, tendo como diferencial o campo PesoTotal, presente no header na Loja, que indica o peso total dos itens que esta contém. O armazenamento dos itens é feito em um vetor conteudo, de tamanho máximo pré definido por meio da constante MAXLOJA, presente no arquivo mochila_publica.h.
+
+O tipo de dado item representa o item, e possui os campos \<id do item>, \<peso do item> e \<valor total>, além de um campo \<cb>, que representa o custo benefício do item, dado por \<valor>/\<peso inicial>.
+
 
 # Main
 A aplicação main deve ser executada da seguinte forma:
