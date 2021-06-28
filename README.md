@@ -11,15 +11,15 @@ O trabalho é composto pelos seguintes arquivos:
 
 # Main
 A aplicação main deve ser executada da seguinte forma:
-  ./main '<arquivo de entrada> <tipo de ordenação> <modo debug>'
+  ./main \<arquivo de entrada> \<tipo de ordenação> \<modo debug>
  
 sendo:
-  - <arquivo de entrada>: arquivo de entrada contendo os itens a serem carregados na loja e utilizados durante a execução. Cada linha do arquivo representa um item, sendo composta por:
-    - <id do item>,<peso do item>,<valor total>
-  - <tipo de ordenação>: permite a seleção do tipo de ordenação a ser utilizada durante a execução, podendo ser:
+  - \<arquivo de entrada>: arquivo de entrada contendo os itens a serem carregados na loja e utilizados durante a execução. Cada linha do arquivo representa um item, sendo composta por:
+    - \<id do item>,\<peso do item>,\<valor total>
+  - \<tipo de ordenação>: permite a seleção do tipo de ordenação a ser utilizada durante a execução, podendo ser:
     - 0: Utiliza o método QuickSort
     - 1: Utiliza o método BubbleSort
-  - <modo debug>: exibe ou omite mensagens de debug, podendo ser:
+  - \<modo debug>: exibe ou omite mensagens de debug, podendo ser:
     - 0: Exibe debug
     - 1: Omite debug
 
