@@ -81,15 +81,25 @@ sendo:
 # Mochila.c
 Contém os códigos do TDA Mochila, com as seguintes funções:
 
-- int CriarMochila(pMochila \*M, pLoja L, float proporcao, int Exibe)
-- int CriarLoja(pLoja \*L, float CapacidadeLoja, int Exibe)
-- int AddLoja(pLoja L, int ID, float valor, float peso, int Exibe)
-- int ImprimeLoja(pLoja L)
-- int ImprimeMochila(pMochila M)
-- int quicksort_r(pLoja L, int start, int end)
-- int bubblesort(pLoja L)
-- int QuickSortLoja(pLoja L, int Exibe)
-- int BubbleSortLoja(pLoja L, int Exibe)
-- int CarregaMochila(pMochila M, pLoja L, int Exibe)
+- int CriarMochila(pMochila \*M, pLoja L, float proporcao, int Exibe): Cria mochila M, com base nos itens existentes na loja L. A mochila tem tamanho igual ao tamanho da loja multiplicado pelo parâmetro proporcao.
+
+- int CriarLoja(pLoja \*L, float CapacidadeLoja, int Exibe): Cria loja L, com capacidade dada pelo parâmetro CapacidadeLoja.
+
+- int AddLoja(pLoja L, int ID, float valor, float peso, int Exibe): Adiciona à loja L novo idem com os dados ID, valor e peso informados.
+
+- int ImprimeLoja(pLoja L): Imprime os itens e suas respectivas informações, presentes na loja L.
+ 
+- int ImprimeMochila(pMochila M): Imprime os itens e suas respectivas informações, presentes na mochila M.
+
+- int quicksort_r(pLoja L, int start, int end): Ordena a loja L utilizando o algoritmo quicksort, utilizando os parâmetros início e fim.
+
+- int bubblesort(pLoja L): Ordena a loja L utilizando o algoritmo BubbleSort.
+
+- int QuickSortLoja(pLoja L, int Exibe): Chama a execução da ordenação da loja L, utilizando o algoritmo QuickSort.
+
+- int BubbleSortLoja(pLoja L, int Exibe): Chama a execução da ordenação da loja L, utilizando o algoritmo BubbleSort.
+
+- int CarregaMochila(pMochila M, pLoja L, int Exibe): Executa a função gulosa, que carrega a mochila com os itens de maior \<cb> presentes na loja L.
+
 - int DestruirMochila(pMochila M, int Exibe)
 - int DestruirLoja(pLoja L, int Exibe)
