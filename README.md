@@ -93,9 +93,9 @@ A execução do main irá percorrer as seguintes etapas:
     - Destruir a Loja  
     - Destruir a Mochila  
     
-Exemplo:
-    ./main entrada150k.txt 0 0
-    A execução do comando acima irá carregar a loja utilizando os dados contidos no arquivo entrada150k.txt. Os parâmetros 0 e 0 indicam que o algoritmo de ordenação a ser utilizado é o QuickSort, e que as mensagens de debug devem ser omitidas.
+Exemplo:  
+    ./main entrada150k.txt 0 0  
+    A execução do comando acima irá carregar a loja utilizando os dados contidos no arquivo entrada150k.txt. Os parâmetros 0 e 0 indicam que o algoritmo de ordenação a ser utilizado é o QuickSort, e que as mensagens de debug devem ser omitidas.  
     
 # Mochila.c
 Contém os códigos do TDA Mochila, com as seguintes funções:
