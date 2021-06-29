@@ -70,17 +70,17 @@ Para compilação da aplicação main, que demonstra a execução da solução, 
 
 # Main
 A aplicação main deve ser executada da seguinte forma:
-  ./main \<arquivo de entrada> \<tipo de ordenação> \<modo debug>
+  ./main \<arquivo de entrada> \<tipo de ordenação> \<Exibe>
  
 sendo:
   - \<arquivo de entrada>: arquivo de entrada contendo os itens a serem carregados na loja e utilizados durante a execução. Cada linha do arquivo representa um item, sendo composta por:
     - \<id do item>,\<peso do item>,\<valor total>
-  - \<tipo de ordenação>: permite a seleção do tipo de ordenação a ser utilizada durante a execução, podendo ser:
+  - \<tipo de ordenação>: permite a seleção do tipo de ordenação a ser utilizada durante a execução,  podendo assumir os seguintes valores:
     - 0: Utiliza o método QuickSort
     - 1: Utiliza o método BubbleSort
-  - \<modo debug>: exibe ou omite mensagens de debug, podendo ser:
-    - 0: Omite debug
-    - 1: Exibe debug
+  - \<Exibe>: exibe ou omite mensagens durante o processo de execução, podendo assumir os seguintes valores:
+    - 0: Omite mensagens
+    - 1: Exibe mensagens
 
 A execução do main irá percorrer as seguintes etapas:  
     - Criar a Loja  
@@ -96,6 +96,8 @@ A execução do main irá percorrer as seguintes etapas:
 Exemplo:  
     ./main entrada150k.txt 0 0  
     A execução do comando acima irá carregar a loja utilizando os dados contidos no arquivo entrada150k.txt. Os parâmetros 0 e 0 indicam que o algoritmo de ordenação a ser utilizado é o QuickSort, e que as mensagens de debug devem ser omitidas.  
+    
+Após a execução, são exibidas estatístiscas simples ou detalhadas. Para que seja possível visualizar os itens e pesos que compõe a mochila, bem como o lucro máximo obtido, a aplicação main deve ser executada com o parâmetro \<Exibe> = 1.
     
 # Mochila.c
 Contém os códigos do TDA Mochila, com as seguintes funções:
@@ -123,3 +125,32 @@ Contém os códigos do TDA Mochila, com as seguintes funções:
 - **int DestruirMochila(pMochila M, int Exibe)**: Desaloca a memória referente aos itens e à mochila M.
 
 - **int DestruirLoja(pLoja L, int Exibe)**: Desaloca a memória referente aos itens e à loja L.
+
+# Mochila_publica.h
+Contém a definição da constante MAXLOJA, que identifica a capacidade máxima da loja e da mochila. Além disso, contém as seguintes funções públicas do TDA:
+
+- **int CriarMochila(pMochila \*M, pLoja L, float proporcao, int Exibe)**
+
+- **int AddLoja(pLoja L, int ID, float valor, float peso, int Exibe)**
+
+- **int ImprimeLoja(pLoja L)**
+ 
+- **int ImprimeMochila(pMochila M)**
+
+- **int QuickSortLoja(pLoja L, int Exibe)**
+
+- **int BubbleSortLoja(pLoja L, int Exibe)**
+
+- **int CarregaMochila(pMochila M, pLoja L, int Exibe)**
+
+- **int DestruirMochila(pMochila M, int Exibe)**
+
+- **int DestruirLoja(pLoja L, int Exibe)**
+
+# Mochila_privada.h
+Contém os structs Item, Loja e Mochila, além das seguintes funções privadas:
+
+- **int quicksort_r(pLoja L, int start, int end)**
+
+- **int bubblesort(pLoja L)**
+
