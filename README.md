@@ -3,6 +3,7 @@ Este trabalho foi desenvolvido por Danilo, Douglas, Marco e Marcos, para a ativi
 
 O trabalho é composto pelos seguintes arquivos:
 
+- Makefile: Arquivo com os parâmetros para compilação da aplicação.
 - main.c: Aplicação desenvolvida para executar a solução proposta.
 - mochila.c: Arquivo .c contendo os códigos das funções do TDA.
 - mochila_privada.h: Header contendo os structs e funções privadas do TDA.
@@ -50,7 +51,7 @@ Os tipos de dados Mochila e Loja são similares, tendo como diferencial o campo 
 
 O tipo de dado item representa o item, e possui os campos \<id do item>, \<peso do item> e \<valor total>, além de um campo \<cb>, que representa o custo benefício do item, dado por \<valor>/\<peso inicial>.
 
-O primeiro passo da execução envolve a criação da Lojaseguida da coleta das informações contidas no arquivo de entrada, com as quais são criados três vetores: valor, qtd_inicial e id.
+O primeiro passo da execução envolve a criação da Loja, seguida da coleta das informações contidas no arquivo de entrada, com as quais são criados três vetores: valor, qtd_inicial e id.
 
 Após a criação dos vetores, é realizado um laço for, para adicionar os itens coletados à Loja:
 
@@ -63,6 +64,9 @@ Após a criação dos vetores, é realizado um laço for, para adicionar os iten
 Em seguida é realizada a criação da Mochila, seguida da ordenação decrescente do vetor de itens da Loja, considerando o campo \<cb>, utilizando a função BubbleSortLoja ou QuickSortLoja.
 
 Por fim, a função CarregaMochila avalia a capacidade disponível na mochila, preenchendo-a com os itens de maior \<cb> da Loja, até que a capacidade da mochila seja igual a 0.
+
+# Compilação e execução
+Para compilação da aplicação main, que demonstra a execução da solução, deve ser utilizado o comando make, que utiliza os parâmetros contidos no arquivo Makefile para realizar a compilação.
 
 # Main
 A aplicação main deve ser executada da seguinte forma:
@@ -88,6 +92,10 @@ A execução do main irá percorrer as seguintes etapas:
     - Imprimir as estatísticas da execução  
     - Destruir a Loja  
     - Destruir a Mochila  
+    
+Exemplo:
+    ./main entrada150k.txt 0 0
+    A execução do comando acima irá carregar a loja utilizando os dados contidos no arquivo entrada150k.txt. Os parâmetros 0 e 0 indicam que o algoritmo de ordenação a ser utilizado é o QuickSort, e que as mensagens de debug devem ser omitidas.
     
 # Mochila.c
 Contém os códigos do TDA Mochila, com as seguintes funções:
